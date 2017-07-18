@@ -1,0 +1,19 @@
+version: '3'
+services:
+ db:
+   image: mysql:5.6
+   container_name: test-mysql
+   environment:
+     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_DATABASE=weather
+   restart: always
+   ports:
+     - "3306"
+ web:
+   build: .
+   container_name: test-webapp
+   restart: always
+   ports:
+     - "80:80"
+   depends_on:
+     - db
